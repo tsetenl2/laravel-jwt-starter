@@ -1,0 +1,17 @@
+{
+    "name": "tlama/laravel-jwt-starter",
+    "description": "Boilerplate for using API based JWT authentication on Laravel applications",
+    "require-dev": {
+        "laravelcollective/html": "^5.4",
+        "firebase/php-jwt": "^5.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tseten Lama",
+            "email": "tdl2116@columbia.edu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
