@@ -14,7 +14,7 @@ class LaravelJWTStarterServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/views' => app_path('resources/views/'),
+            __DIR__ . '/views' => resource_path('views'),
         ]);
         $this->publishes([
             __DIR__ . '/css' => public_path('css'),

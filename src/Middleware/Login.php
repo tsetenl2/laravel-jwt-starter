@@ -28,19 +28,15 @@ class Login
         ];
         $v = Validator::make(Input::all(), $rules);
         if ($v->fails()) {
-            // username or password missing
-            // validation fails
-            // used to retain input values
+            // If validation fails then the errors are flashed
             Input::flash();
             // return to login page with errors
             return Redirect::to('login')
                 ->withInput()
                 ->withErrors($v->messages());
         }
-        // send user data to auth server
-        // check response.data.response.status_code === 1033
-        // verify token payload has administrator as one of the roles
-        $client = new Client(); //GuzzleHttp\Client
+        // Send user data to auth server and check response code
+        $client = new Client();
         $result = $client->post(env('AUTH_URL'), [
             'json' => [
                 'email' => Input::get('email'),
@@ -50,27 +46,22 @@ class Login
         $response = (array) json_decode($result->getBody());
         $response = $response['response'];
         $status_code = $response->status_code;
-        //successful login
-        if ($status_code == 1033) {
+        // Check for successful login
+        if ($status_code == env("SUCCESS_STATUS_CODE")) {
             $token = $response->data->token;
-            // decode token to obtain account info
+            // You should check the decoded token here for additional data relevant to authentication
             $decoded = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
             $decoded_array = (array) $decoded;
             $accounts = $decoded_array['accounts'];
-            $hasPrivilege = collect($accounts)->filter(function ($account) {
-                return $account->role->title == 'Account Manager' || $account->role->title == 'Account Manager Admin' ||
-                $account->role->title == 'Administrator';
-            })->isNotEmpty();
-            // authentication success, enters home page
-            if ($hasPrivilege) {
-                // store token in session with expiry of 2 hours
+            $hasPermissions = true;
+            if ($hasPermissions) {
+                // Store token in session with expiry se
                 session(['token' => $token]);
-
                 return $next($request);
             }
 
             return Redirect::to('login')
-                ->withErrors('Do not have admin privileges');
+                ->withErrors('Do not have permissions');
         }
         // authentication fails, so back to login page with errors
         return Redirect::to('login')
