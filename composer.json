@@ -9,10 +9,5 @@
             "name": "Tseten Lama",
             "email": "tdl2116@columbia.edu"
         }
-    ],
-    "autoload": {
-        "psr-4": {
-            "LaravelJWTStarter\\": "src/"
-        }
-    }
+    ]
 }
