@@ -17,12 +17,12 @@ class NotLoggedIn
     public function handle($request, Closure $next)
     {
         // Obtain token from storage
-        $token = $request->session()->get('token', 'noToken');
-        // if not logged in go to login page
-        if ($token == 'noToken') {
+        $token = $request->session()->get('token', null);
+        // Redirect to login if token doesn't exist
+        if ($token == null) {
             return $next($request);
         }
-        // stay on the same page
+        // Stay on the same page
         return redirect('home');
     }
 }

@@ -8,6 +8,6 @@
             "email": "tdl2116@columbia.edu"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {}
 }

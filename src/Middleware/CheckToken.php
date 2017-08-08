@@ -17,12 +17,12 @@ class CheckToken
     public function handle($request, Closure $next)
     {
         // Obtain token from storage
-        $token = $request->session()->get('token', 'noToken');
-        // continue with request if token not empty
-        if ($token != 'noToken') {
+        $token = $request->session()->get('token', null);
+        // Continue with request if token exists
+        if ($token != null) {
             return $next($request);
         }
-        // return to login if token doesn't exist
+        // Else redirect to login
         return redirect('login');
     }
 }
