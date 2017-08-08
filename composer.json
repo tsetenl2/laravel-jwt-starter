@@ -1,5 +1,5 @@
 {
-    "name": "tlama/laravel-jwt-starter",
+    "name": "TLX3/LaravelJWTStarter",
     "description": "Boilerplate for using API based JWT authentication on Laravel applications",
     "license": "MIT",
     "authors": [

@@ -11,10 +11,28 @@ To install this package you will need:
 
 Also, you will need to first install these packages
 - Forms & HTML - [laravelcollective/html](https://laravelcollective.com/docs/master/html)
+    - ``` composer require "laravelcollective/html" ```
+    - Update service providers and aliases in `config/app.php` file
+    -  ``` php
+       'providers' => [
+            // ...
+            Collective\Html\HtmlServiceProvider::class,
+            // ...
+        ],
+        ...
+        'aliases' => [
+            // ...
+            'Form' => Collective\Html\FormFacade::class,
+            'Html' => Collective\Html\HtmlFacade::class,
+            // ...
+        ],
+        ```
 - PHP-JWT - [firebase/php-jwt](https://github.com/firebase/php-jwt)
+    - ``` composer require firebase/php-jwt ```
 - Guzzle - [guzzlehttp/guzzle](http://docs.guzzlephp.org/en/stable/overview.html#installation)
+    - ``` composer require guzzlehttp/guzzle ```
 
-This project integrates these three packages for a form builder, token decoder, and HTTP Client.
+This project integrates these three packages for a form builder, token decoder, and HTTP Client. These packages have numerous features that will help with development over time by reducing overhead.
 
 #### 1) Environment variables
 
@@ -74,7 +92,7 @@ Update `routes/web.php` with these routes. You can modify and change these route
     });
 ```
 ### Usage
-Alongside the routes, you will probably need to modify both `views/login.blade.php` and `routes/web.php` to fit your application logic. The form inputs are set here along with the env variables. Within these file, you should also modify middleware to decode the token for neccessary payload items if needed.
+Alongside the routes, you will probably need to modify both `views/login.blade.php` and `routes/web.php` to fit your application logic. The form inputs are set here along with the .env variables. Within these file, you should also modify middleware to decode the token for neccessary payload items if needed.
 
 License
 ----
