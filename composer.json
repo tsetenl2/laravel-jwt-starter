@@ -1,13 +1,18 @@
 {
-    "name": "TLX3/LaravelJWTStarter",
-    "description": "Boilerplate for using API based JWT authentication on Laravel applications",
+    "name": "tlx3/laravel-jwt-starter",
+    "description": "Boilerplate for using your own API based JWT authentication on Laravel applications",
     "license": "MIT",
+    "keywords": ["jwt", "login"],
+    "homepage": "https://github.com/TLX3/laravel-jwt-starter",
     "authors": [
         {
             "name": "Tseten Lama",
             "email": "tdl2116@columbia.edu"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "LaravelJWTStarter\\": "src/"
+        }
+    }
 }

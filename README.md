@@ -1,4 +1,4 @@
-# Laravel-JWT-Starter
+# laravel-jwt-starter
 
 In a microservice oriented architecture, a client component will communicate with set of microservices where interactions need to be authenticated and authorized. Usually, the users of these microservices will authenticate using the same API in this system. Often, the creation of a login page and authentication middleware will need to be replicated in each of these microservices.
 
@@ -92,7 +92,12 @@ Update `routes/web.php` with these routes. You can modify and change these route
     });
 ```
 ### Usage
-Alongside the routes, you will probably need to modify both `views/login.blade.php` and `routes/web.php` to fit your application logic. The form inputs are set here along with the .env variables. Within these file, you should also modify middleware to decode the token for neccessary payload items if needed.
+After installation run:
+```
+artisan vendor:publish --provider="TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider"
+```
+You can now go to `/login` and attempt to login and access protected routes as set prior.
+Alongside the routes, you will probably want to modify both `views/login.blade.php` and `app/Http/Middleware/Login.php` to fit your application logic. The authentication inputs are set here along with the .env variables names that you can customize. You should also modify Login and CheckToken middleware to decode the token for neccessary payload items if needed.
 
 License
 ----
