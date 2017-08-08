@@ -12,8 +12,8 @@
             <div class="title">
               Laravel JWT Starter
             </div>
-
-            {{Form::open (array ('url' => 'logincheck'))}}
+            {{-- You can set authentication parameters here --}}
+            {{Form::open (array ('url' => 'authenticate'))}}
             <p> {{Form::email ('email', '', array ('placeholder'=>'Email','maxlength'=>30))}} </p>
             <p> {{Form::password ('password', array('placeholder'=>'Password','maxlength'=>30)) }} </p>
             <p> {{Form::submit ('Submit')}} </p>
