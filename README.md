@@ -9,7 +9,26 @@ To install this package you will need:
 - Laravel 5
 - PHP 5.4 +
 
-Also, you will need to first install these packages
+Run ```composer require tlx3/laravel-jwt-starter```
+Register this package's Service Provider by adding it to the `providers`
+section of your `config/app.php` file:
+
+```php
+   'providers' => [
+       // ... other providers omitted
+       TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider::class,
+   ],
+```
+
+Then to publish the necessary middleware, views, and css:
+
+```
+php artisan vendor:publish
+or
+php artisan vendor:publish  --provider="TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider"
+```
+
+Also, you will need to install these packages
 - Forms & HTML - [laravelcollective/html](https://laravelcollective.com/docs/master/html)
     - ``` composer require "laravelcollective/html" ```
     - Update service providers and aliases in `config/app.php` file
@@ -37,33 +56,15 @@ This project integrates these three packages for a form builder, token decoder, 
 #### 1) Environment variables
 
 Set your authentication API endpoint, JWT secret, and successful login response code
-in your `.env` file:
+in your `.env` file, you can add/remove to fit your requirements in auth:
 ```
 AUTH_URL=
 JWT_SECRET=
 STATUS_CODE=
 ```
 
-#### 2) Service Provider
-
-Register this package's Service Provider by adding it to the `providers`
-section of your `config/app.php` file:
-
-```php
-   'providers' => [
-       // ... other providers omitted
-       TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider::class,
-   ],
-```
-
-Then to publish the necessary middleware, views, and css:
-
-```
-artisan vendor:publish --provider="TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider"
-```
-
-#### 3) Middleware
-Update $routeMiddleware in `app/Http/Middleware/kernel.php` file with the additional middleware added:
+#### 2) Middleware
+Update $routeMiddleware in `app/Http/Middleware/kernel.php` file with the additional middleware added. You should modify these along with the login.blade.php view to fit your application logic:
 
 ```php
     protected $routeMiddleware = [
@@ -75,8 +76,9 @@ Update $routeMiddleware in `app/Http/Middleware/kernel.php` file with the additi
     ];
 ```
 
-#### 4) Routes
+#### 3) Routes
 Update `routes/web.php` with these routes. You can modify and change these routes to fit your project, I've added a filler home page as a landing page after logging in:
+
 ```php
     Route::get('login', function () {
         return view('login');
@@ -97,7 +99,7 @@ Update `routes/web.php` with these routes. You can modify and change these route
         })->middleware('logout');
     });
 ```
-### Usage
+#### 4) Usage
 After installation you can now go to `/login` and attempt to login and access protected routes as set prior.
 Alongside the routes, you will probably want to modify both `views/login.blade.php` and `app/Http/Middleware/Login.php` to fit your application logic. The authentication inputs are set here along with the .env variables names that you can customize. You should also modify Login and CheckToken middleware to decode the token for neccessary payload items if needed.
 
