@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelJWTStarter;
+namespace TLX3\LaravelJWTStarter;
 
 use Illuminate\Support\ServiceProvider;
 
