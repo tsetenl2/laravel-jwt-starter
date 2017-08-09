@@ -1,4 +1,4 @@
-# Laravel-JWT-Starter
+# laravel-jwt-starter
 
 In a microservice oriented architecture, a client component will communicate with set of microservices where interactions need to be authenticated and authorized. Usually, the users of these microservices will authenticate using the same API in this system. Often, the creation of a login page and authentication middleware will need to be replicated in each of these microservices.
 
@@ -11,10 +11,28 @@ To install this package you will need:
 
 Also, you will need to first install these packages
 - Forms & HTML - [laravelcollective/html](https://laravelcollective.com/docs/master/html)
+    - ``` composer require "laravelcollective/html" ```
+    - Update service providers and aliases in `config/app.php` file
+    -  ``` php
+       'providers' => [
+            // ...
+            Collective\Html\HtmlServiceProvider::class,
+            // ...
+        ],
+        ...
+        'aliases' => [
+            // ...
+            'Form' => Collective\Html\FormFacade::class,
+            'Html' => Collective\Html\HtmlFacade::class,
+            // ...
+        ],
+        ```
 - PHP-JWT - [firebase/php-jwt](https://github.com/firebase/php-jwt)
+    - ``` composer require firebase/php-jwt ```
 - Guzzle - [guzzlehttp/guzzle](http://docs.guzzlephp.org/en/stable/overview.html#installation)
+    - ``` composer require guzzlehttp/guzzle ```
 
-This project integrates these three packages for a form builder, token decoder, and HTTP Client.
+This project integrates these three packages for a form builder, token decoder, and HTTP Client. These packages have numerous features that will help with development over time by reducing overhead.
 
 #### 1) Environment variables
 
@@ -36,6 +54,12 @@ section of your `config/app.php` file:
        // ... other providers omitted
        TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider::class,
    ],
+```
+
+Then to publish the necessary middleware, views, and css:
+
+```
+artisan vendor:publish --provider="TLX3\LaravelJWTStarter\LaravelJWTStarterServiceProvider"
 ```
 
 #### 3) Middleware
@@ -74,7 +98,8 @@ Update `routes/web.php` with these routes. You can modify and change these route
     });
 ```
 ### Usage
-Alongside the routes, you will probably need to modify both `views/login.blade.php` and `routes/web.php` to fit your application logic. The form inputs are set here along with the env variables. Within these file, you should also modify middleware to decode the token for neccessary payload items if needed.
+After installation you can now go to `/login` and attempt to login and access protected routes as set prior.
+Alongside the routes, you will probably want to modify both `views/login.blade.php` and `app/Http/Middleware/Login.php` to fit your application logic. The authentication inputs are set here along with the .env variables names that you can customize. You should also modify Login and CheckToken middleware to decode the token for neccessary payload items if needed.
 
 License
 ----
