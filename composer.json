@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "TLX3\\LaravelJWTStarter\\": "src/"
+            "LaravelJWTStarter\\": "src/"
         }
     }
 }
